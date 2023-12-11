@@ -4,3 +4,7 @@ sketch.js
 index.html
 instrument.js
 play.js
+key.js
+musician.js
+musicianAutoPlayer.js
+musicList.js

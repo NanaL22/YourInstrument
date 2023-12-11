@@ -81,17 +81,21 @@ class Key {
 
 
 
+  // 수정
   play() {
-    let keyOrder = [65, 87, 83, 69, 68, 70, 84, 71, 89, 72, 85, 74]; 
-    if (keyCode == keyOrder[this.n]) { 
+    // let keyOrder = [65, 87, 83, 69, 68, 70, 84, 71, 89, 72, 85, 74]; 
+    let keys = ['a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j'];
+    if (key == keys[this.n]) { 
       let sound = this.assign(); 
       this.sound.play();
     }
   }
 
+  // 수정
   stop() {
-    let keyOrder = [65, 87, 83, 69, 68, 70, 84, 71, 89, 72, 85, 74]; 
-    if (keyCode == keyOrder[this.n]) {
+    // let keyOrder = [65, 87, 83, 69, 68, 70, 84, 71, 89, 72, 85, 74]; 
+    let keys = ['a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j'];
+    if (key == keys[this.n]) {
       this.sound.stop();
     }
   }

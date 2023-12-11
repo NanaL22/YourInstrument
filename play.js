@@ -8,6 +8,12 @@ class Play {
     this.isDisplayingEndMessage = false;
   }
 
+  init() {
+    this.isDisplayingStartMessage = true;
+    this.isPlaying = false;
+    this.isDisplayingEndMessage = false;
+  }
+
   show() {
     push();
     noStroke();
@@ -36,6 +42,9 @@ class Play {
     } else if (this.isPlaying && this.isMouseInMusicianButton()) {
       this.isPlaying = false;
       this.isDisplayingEndMessage = true;
+    } else if (this.isDisplayingEndMessage && this.isMouseInConfirmButton()) {
+      playPage = false;
+      musicianPage = true;
     }
   }
 
@@ -112,10 +121,16 @@ class Play {
   }
 
   keyPressed() {
-    if (this.isPlaying) myInst.play()
+    if (this.isPlaying) {
+      if (!pressedKeys.has(key)) pressedKeys.add(key);
+      myInst.play();
+    }
   }
 
   keyReleased() {
-    if (this.isPlaying) myInst.stop()
+    if (this.isPlaying) {
+      if (pressedKeys.has(key)) pressedKeys.delete(key);
+      myInst.stop();
+    }
   }
 }

@@ -1,8 +1,10 @@
 let pNotes = [];
 let p1Note, p2Note, p3Note, p4Note, p5Note, p6Note;
+// 추가
 let keyNum = 12; // The number of keys
 let frameWidth; // Frame width
 let frameHeight; // Frame height
+//
 
 class Instrument {
   constructor() {
@@ -70,7 +72,7 @@ class Instrument {
 
     let dx = 0;
     let keys = ['a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j'];
-    if (keyIsPressed && (key === keys[i])) {
+    if (keyIsPressed && (pressedKeys.has(keys[i]))) {
       dx = random(-3, 3);
     }
 
@@ -119,7 +121,6 @@ class Instrument {
   }
 
   /*
-  implemented in play.js
   show() { 
     rectMode(CORNER);
     fill(themeColor);

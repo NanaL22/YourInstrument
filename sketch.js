@@ -20,9 +20,19 @@ let drawingApp;
 let textManager; 
 
 let playPage = false; 
-// images
+// Play Page
 let masterImg2;
 let insideWorkshopImg;
+let pressedKeys = new Set();
+//
+
+// Musician Page
+let musicianPage = false;
+let streetImg;
+let musicianImg1;
+let musicianImg2;
+let musicianImg3;
+//
 
 let winds = [];
 let strings = [];
@@ -33,13 +43,22 @@ let brass = [];
 let myInst; 
 
 
-
+// 수정
 function preload() {
   startingImg = loadImage("assets/startingImage_2.png");
   extractorImg = loadImage("assets/extractorImage_1.png")
-  // load images
+
+  // Play Page images
   masterImg2 = loadImage("assets/master_2.png")
   insideWorkshopImg = loadImage("assets/workshop_inside.png")
+  //
+
+  // Musician Page images
+  streetImg = loadImage("assets/street.png");
+  musicianImg1 = loadImage("assets/musician_normal.png");
+  musicianImg2 = loadImage("assets/musician_surprised.png");
+  musicianImg3 = loadImage("assets/musician_smile.png");
+  //
 
   cam = createCapture(VIDEO);
   cam.hide();
@@ -70,20 +89,27 @@ function preload() {
   }
 }
 
-
+// 수정
 function setup() {
   createCanvas(1000, 750);
   starting = new Begins(startingImg, width/2, height/2);
   extractor = new Begins(extractorImg, width*0.55, height/2);
 
-  // create Play object
-  let playPageImages = [insideWorkshopImg, masterImg2]; // 추가
-  play = new Play(playPageImages); // 추가
+  // Create Play object
+  let playPageImages = [insideWorkshopImg, masterImg2];
+  play = new Play(playPageImages);
+  //
+
+  // Create Musician object
+  let musicianPageImages = [streetImg, musicianImg1, musicianImg2, musicianImg3];
+  musician = new Musician(musicianPageImages);
+  //
 
   drawingApp = new DrawingApp();
   textManager = new TextManager();
 }
 
+// 수정
 function draw() {
   if (startingPage) { 
     colorMode(RGB); 
@@ -116,9 +142,12 @@ function draw() {
     background(themeColor);
     // myInst.show();
     play.show(); // 추가
+  } else if (musicianPage) { // 추가
+    musician.show();
   }
 }
 
+// 수정
 function mouseClicked() { 
   if(startingPage) {
     if (mouseX > starting.buttonX -30 && mouseX < starting.buttonX +30 && mouseY > starting.buttonY - 15 && mouseY < starting.buttonY +15) {
@@ -153,7 +182,9 @@ function mouseClicked() {
   } else if (drawingPage_2) {
     drawingApp.mouseClicked(); 
   } else if (playPage) { // 추가
-    play.mouseClicked(); // 추가
+    play.mouseClicked();
+  } else if (musicianPage) { // 추가
+    musician.mouseClicked();
   }
 }
 
@@ -171,6 +202,7 @@ function mouseDragged() {
   }
 }
 
+// 수정
 function keyPressed() {
   if (playPage) play.keyPressed(); // 수정
 
@@ -193,9 +225,15 @@ function keyPressed() {
 
     cam = createCapture(VIDEO);
     cam.hide();
+
+    // 추가
+    play.init();
+    musician.init();
+    //
   }
 }
 
+// 수정
 function keyReleased() {
   if (playPage) play.keyReleased(); // 수정
 }
