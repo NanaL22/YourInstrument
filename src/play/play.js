@@ -20,6 +20,7 @@ class Play {
     rectMode(CORNER);
 
     if (this.isDisplayingStartMessage || this.isDisplayingEndMessage) {
+      colorMode(HSB, 360, 100, 100, 1);
       image(this.insideWorkshopImg, 0, 0);
       fill(0, 0.3);
       rect(0, 0, width, height);
@@ -44,7 +45,7 @@ class Play {
       this.isDisplayingEndMessage = true;
     } else if (this.isDisplayingEndMessage && this.isMouseInConfirmButton()) {
       playPage = false;
-      musicianPage = true;
+      betweenPlayToMusician = true;
     }
   }
 

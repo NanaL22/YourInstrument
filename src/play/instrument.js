@@ -43,12 +43,13 @@ class Instrument {
       this.drawKey(i);
     }
     pop();
+
   }
 
   // 추가
   drawFrame() {
     push();
-    fill(28, 55, 39);
+    fill(penColor);
     stroke(0);
     strokeWeight(2);
     rect(0, 0, frameWidth, frameHeight);
@@ -92,19 +93,19 @@ class Instrument {
     // curve(barrelX + 50, barrelY, barrelX, barrelY, barrelX, barrelY + barrelHeight, barrelX + 50, barrelY + barrelHeight);
     // curve(barrelX + barrelWidth - 50, barrelY, barrelX + barrelWidth, barrelY, barrelX + barrelWidth, barrelY + barrelHeight, barrelX + barrelWidth - 50, barrelY + barrelHeight);
 
-    fill(28, 55, 64);
+    fill(themeColor);
     stroke(0);
     strokeWeight(1);
     rect(barrelX, barrelY, barrelWidth, barrelHeight);
 
-    stroke(28, 55, 40);
+    stroke(penColor);
     strokeWeight(1);
     strokeCap(SQUARE);
     for (let j = 1; j <=3; j++) {
       line(barrelX + barrelWidth * 0.25 * j, barrelY, barrelX + barrelWidth * 0.25 * j, barrelY + barrelHeight);
     }
 
-    fill(255, 2, 85);
+    fill(paperColor);
     stroke(0);
     strokeWeight(1);
     rect(barrelX, barrelY, barrelWidth, 15);

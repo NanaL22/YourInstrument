@@ -290,10 +290,10 @@ class Musician {
         else if (this.isMouseInNoButton()) this.currMessage = 8;
         break;
       case 7:
-        if (this.isMouseInNextButton()) // do something
+        if (this.isMouseInNextButton()) resetButton.justReset(); // 아직 '공유하기' 기능 없어서 첫 페이지로 이동.
         break;
       case 8:
-        if (this.isMouseInNextButton()) // do something
+        if (this.isMouseInNextButton()) resetButton.justReset(); // 아직 '공유하기' 기능 없어서 첫 페이지로 이동.
         break;
     }
   }
@@ -347,8 +347,9 @@ class Musician {
       '악사: \n\n   "다른 노래도 들어보시겠습니까?"',
       '악사: \n\n   "좋은 악기를 연주하게 해 주어 고맙습니다.\n\
       이 아름다운 악기의 소리를 저밖에 듣지 못하는 것은 너무 아쉽네요."',
-      '악사: \n\n   "혹시 괜찮으시다면, 이 곳에 악기를 남겨두어 다른 분들도 이 악기의 소리를 들을 수 있게 도와주실 수\n\
-      있으신가요? 그렇게 해주신다면, 이전 손님들이 남겨두고 가신 악기들의 소리도 들려드리겠습니다."',
+      '악사: \n   "혹시 괜찮으시다면, 이 곳에 악기를 남겨두어 다른 분들도 \n\
+      이 악기의 소리를 들을 수 있게 도와주실 수 있으신가요? \n\
+      그렇게 해주신다면, 이전 손님들이 남겨두고 가신 악기들의 소리도 들려드리겠습니다."',
       '악사: \n\n   "감사합니다, 이쪽으로 따라오시죠."',
       '악사: \n\n   "아쉽군요, 하지만 당신의 악기로 연주하는 것은 정말 즐거운 경험이었습니다.\n\
       당신 또한 즐거운 경험이 되셨기를 바라며, 조심히 들어가세요."'
