@@ -97,12 +97,12 @@ function preload() {
   mainFont = loadFont("assets/YeongdeokBlueroad.otf");
 
   //수정된 이미지로 변경하여 로드
-  startingImg = loadImage("assets/images/workshop_outside.png");
-  withMasterImg = loadImage("assets/images/workshop_inside.png");
-  master1 = loadImage("assets/images/master_1.png");
-  extractGuideImg = loadImage("assets/images/table_mess.png");
-  master2 = loadImage("assets/images/master_2.png");
-  extractorImg = loadImage("assets/images/table_clean.png");
+  startingImg = loadImage("assets/workshop_outside.png");
+  withMasterImg = loadImage("assets/workshop_inside.png");
+  master1 = loadImage("assets/master_1.png");
+  extractGuideImg = loadImage("assets/table_mess.png");
+  master2 = loadImage("assets/master_2.png");
+  extractorImg = loadImage("assets/table_clean.png");
   cam = createCapture(VIDEO);
   cam.hide();
 
@@ -129,7 +129,7 @@ function preload() {
   //
 
   //saveAndLoad Page images
-  musicianHome = loadImage("assets/images/musicianHome.png")
+  musicianHome = loadImage("assets/musicianHome.png")
 
   // 우상단 텍스트에 따라 나오는 효과음
   textSound1 = loadSound('assets/drawing.mp3'); // 도면 그리는 효과음
@@ -165,19 +165,19 @@ function preload() {
   }
 
   //추가: soundEffects
-  doorBell = loadSound('assets/soundEffects/doorBell.mp3');
-  doorOpening = loadSound('assets/soundEffects/doorOpeningnClosing.mp3');
-  family = loadSound('assets/soundEffects/family.mp3');
-  knock = loadSound('assets/soundEffects/knock.mp3');
-  snowStepping = loadSound('assets/soundEffects/snowStepping.mp3');
-  streetLamp = loadSound('assets/soundEffects/streetLamp.mp3');
-  footStep = loadSound('assets/soundEffects/footStep.mp3');
-  cleaning = loadSound('assets/soundEffects/cleaning.mp3');
+  doorBell = loadSound('assets/doorBell.mp3');
+  doorOpening = loadSound('assets/doorOpeningnClosing.mp3');
+  family = loadSound('assets/family.mp3');
+  knock = loadSound('assets/knock.mp3');
+  snowStepping = loadSound('assets/snowStepping.mp3');
+  streetLamp = loadSound('assets/streetLamp.mp3');
+  footStep = loadSound('assets/footStep.mp3');
+  cleaning = loadSound('assets/cleaning.mp3');
 
-  startingBGM = loadSound('assets/bgm/startingBGM.mp3');
-  insideBGM = loadSound('assets/bgm/insideBGM.mp3');
+  startingBGM = loadSound('assets/startingBGM.mp3');
+  insideBGM = loadSound('assets/insideBGM.mp3');
 
-  crowd = loadSound('assets/soundEffects/crowd.mp3');
+  crowd = loadSound('assets/crowd.mp3');
   //
 }
 
