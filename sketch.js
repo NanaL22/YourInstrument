@@ -166,7 +166,7 @@ function preload() {
 
   //추가: soundEffects
   doorBell = loadSound('assets/doorBell.mp3');
-  doorOpening = loadSound('assets/doorOpeningnClosing.mp3');
+  doorOpening = loadSound('assets/doorOpeningNClosing.mp3');
   family = loadSound('assets/family.mp3');
   knock = loadSound('assets/knock.mp3');
   snowStepping = loadSound('assets/snowStepping.mp3');
