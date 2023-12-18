@@ -88,6 +88,7 @@ class Key {
     if (key == keys[this.n]) { 
       let sound = this.assign(); 
       this.sound.play();
+      myGraph.highlighted[this.p - 1] = true;
     }
   }
 
@@ -97,6 +98,7 @@ class Key {
     let keys = ['a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j'];
     if (key == keys[this.n]) {
       this.sound.stop();
+      myGraph.highlighted[this.p - 1] = false;
     }
   }
 

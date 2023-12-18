@@ -42,6 +42,8 @@ let drawingPage_2 = false;
 let drawingApp;
 let textManager;
 
+let myGraph;
+
 //
 let loadingImage;
 let drawingPage_3 = false;
@@ -101,7 +103,6 @@ function preload() {
   loadingImage = loadImage('assets/table_mess.PNG');
 
   // Play Page images
-  masterImg2 = loadImage("assets/master_2.png")
   insideWorkshopImg = loadImage("assets/workshop_inside.png")
   //
 
@@ -179,8 +180,10 @@ function setup() {
   drawingApp = new DrawingApp();
   textManager = new TextManager();
 
+  myGraph = new MyGraph();
+
   // Create Play object
-  let playPageImages = [insideWorkshopImg, masterImg2];
+  let playPageImages = [insideWorkshopImg, master1, master2];
   play = new Play(playPageImages);
   //
 

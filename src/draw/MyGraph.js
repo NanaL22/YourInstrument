@@ -1,8 +1,8 @@
 // 그래프 그리기
 class MyGraph {
-    // constructor() {
-
-    // }
+    constructor() {
+        this.highlighted = [false, false, false, false, false, false];
+    }
 
     // // 파라미터 값 업데이트
     // updateParameter(parameter1, parameter2, parameter3, parameter4, parameter5_1, parameter5) {
@@ -25,22 +25,23 @@ class MyGraph {
             let barHeight = 10; // 막대그래프 밑변 길이
             let gap = 5; // 막대그래프 사이 간격
 
-            fill(themeColor);
-            noStroke();
-            rect(170 + 410 + 15, 10 - 5 - 3, 325, barHeight * 6 + gap * 5 + 10, 10);  // 텍스트 배경
+            if (!playPage && !musicianPage) {
+                fill(themeColor);
+                noStroke();
+                rect(170 + 410 + 15, 10 - 5 - 3, 325, barHeight * 6 + gap * 5 + 10, 10);  // 텍스트 배경
 
-
-            fill(0);
-            noStroke();
-            textStyle(BOLD);
-            textSize(15);
-            textAlign(LEFT);
-            text("선을 긋는 빠르기는 " + parameter1, 170 + 410 + 18, 10);
-            text("지우개 사용 횟수는 " + parameter2, 170 + 410 + 18, 26);
-            text("그은 선의 획수는 " + parameter3, 170 + 410 + 18, 42);
-            text("총 소요시간은 " + parameter4, 170 + 410 + 18, 58);
-            text("펜 사용시간은 " + parameter5_1, 170 + 410 + 18, 74);
-            text("펜 사용시간 / 총 소요시간은 " + parameter5 + "%", 170 + 410 + 18, 90);
+                fill(0);
+                noStroke();
+                textStyle(BOLD);
+                textSize(15);
+                textAlign(LEFT);
+                text("선을 긋는 빠르기는 " + parameter1, 170 + 410 + 18, 10);
+                text("지우개 사용 횟수는 " + parameter2, 170 + 410 + 18, 26);
+                text("그은 선의 획수는 " + parameter3, 170 + 410 + 18, 42);
+                text("총 소요시간은 " + parameter4, 170 + 410 + 18, 58);
+                text("펜 사용시간은 " + parameter5_1, 170 + 410 + 18, 74);
+                text("펜 사용시간 / 총 소요시간은 " + parameter5 + "%", 170 + 410 + 18, 90);
+            }
 
 
 
@@ -87,6 +88,7 @@ class MyGraph {
             } else {
                 brightnessParameter1 = 100;
             }
+            if (this.highlighted[0]) brightnessParameter1 = 100;
             fill(mainH, 50, brightnessParameter1);
 
             rect(175, 10 - 3, widthParameter1, barHeight); // 파라미터 1 막대그래프
@@ -107,6 +109,7 @@ class MyGraph {
             } else {
                 brightnessParameter2 = 100;
             }
+            if (this.highlighted[1]) brightnessParameter2 = 100;
             fill(mainH, 50, brightnessParameter2);
 
             rect(175, 10 - 3 + barHeight + gap, widthParameter2, barHeight);
@@ -125,6 +128,7 @@ class MyGraph {
             } else {
                 brightnessParameter3 = 100;
             }
+            if (this.highlighted[2]) brightnessParameter3 = 100;
             fill(mainH, 50, brightnessParameter3);
 
             rect(175, 10 - 3 + 2 * (barHeight + gap), widthParameter3, barHeight); // 파라미터 3 막대그래프
@@ -143,6 +147,7 @@ class MyGraph {
             } else {
                 brightnessParameter4 = 100;
             }
+            if (this.highlighted[3]) brightnessParameter4 = 100;
             fill(mainH, 50, brightnessParameter4);
 
             rect(175, 10 - 3 + 3 * (barHeight + gap), widthParameter4, barHeight); // 파라미터 4 막대그래프
@@ -162,6 +167,7 @@ class MyGraph {
             } else {
                 brightnessParameter5_1 = 100;
             }
+            if (this.highlighted[4]) brightnessParameter5_1 = 100;
             fill(mainH, 50, brightnessParameter5_1);
 
             rect(175, 10 - 3 + 4 * (barHeight + gap), widthParameter5_1, barHeight); // 파라미터 5_1 막대그래프
@@ -186,6 +192,7 @@ class MyGraph {
             } else {
                 brightnessParameter5 = 100;
             }
+            if (this.highlighted[5]) brightnessParameter5 = 100;
             fill(mainH, 50, brightnessParameter5);
 
             rect(175, 10 - 3 + 5 * (barHeight + gap), widthParameter5, barHeight); // 파라미터 5 막대그래프

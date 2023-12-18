@@ -11,24 +11,29 @@ class Musician {
     this.currMusicianImage = this.musicianImgNormal;
     this.isPlaying = false;
     this.music = 0;
+    this.isMusicSet = false;
 
     this.player = new MusicAutoPlayer();
     this.playCount = 0;
+    this.playedMusic = new Set();
   }
 
   init() {
     this.isDisplayingMessage = true;
     this.isPlaying = false;
+    this.isMusicSet = false;
     this.currMessage = 0;
     this.currMessageOptions = 1;
     this.music = 0;
     this.playCount = 0;
+    this.playedMusic = new Set();
   }
 
   show() {
     push();
     this.setCurrMessageOptions();
     this.setCurrMusicianImage();
+    if (!this.isMusicSet) this.setRecommendedMusic();
 
     noStroke();
     rectMode(CORNER);
@@ -43,6 +48,7 @@ class Musician {
       image(this.streetImg, 0, 0);
       fill(0, 0.7);
       rect(0, 0, width, height);
+      myGraph.drawingAppGraph();
       myInst.draw();
       this.drawEndMusicButton();
 
@@ -90,6 +96,11 @@ class Musician {
       case 8:
         this.currMusicianImage = this.musicianImgSmile;
     }
+  }
+
+  setRecommendedMusic() {
+    this.music = (parameter4 <= 20) ? 0 : (parameter4 <= 40) ? 1 : 2;
+    this.isMusicSet = true;
   }
 
   drawButton() {
@@ -189,51 +200,45 @@ class Musician {
       textColor = color(255, 150);
       noStroke();
     }
-    function drawFirstButton() {
+    function alreadyPlayed() {
+      buttonColor = color(128, 150);
+      textColor = color(128, 150);
+      noStroke();
+    }
+    function drawFirstButton(instance) {
+      if (instance.isMouseInFirstButton()) highlight();
+      else if (instance.playedMusic.has(0)) alreadyPlayed();
+      else noHighlight();
       fill(buttonColor);
       rect(width * 0.4, height * 0.94, 70, 40, 10);
       fill(textColor);
       noStroke();
       text("A", width * 0.4, height * 0.94);
     }
-    function drawSecondButton() {
+    function drawSecondButton(instance) {
+      if (instance.isMouseInSecondButton()) highlight();
+      else if (instance.playedMusic.has(1)) alreadyPlayed();
+      else noHighlight();
       fill(buttonColor);
       rect(width * 0.5, height * 0.94, 70, 40, 10);
       fill(textColor);
       noStroke();
       text("B", width * 0.5, height * 0.94);
     }
-    function drawThirdButton() {
+    function drawThirdButton(instance) {
+      if (instance.isMouseInThirdButton()) highlight();
+      else if (instance.playedMusic.has(2)) alreadyPlayed();
+      else noHighlight();
       fill(buttonColor);
       rect(width * 0.6, height * 0.94, 70, 40, 10);
       fill(textColor);
       noStroke();
       text("C", width * 0.6, height * 0.94);
     }
-    if (this.isMouseInFirstButton()) {      
-      highlight();
-      drawFirstButton();
-      noHighlight();
-      drawSecondButton();
-      drawThirdButton();
-    } else if (this.isMouseInSecondButton()) {
-      highlight();
-      drawSecondButton();
-      noHighlight();
-      drawFirstButton();
-      drawThirdButton();
-    } else if (this.isMouseInThirdButton()) {
-      highlight();
-      drawThirdButton();
-      noHighlight();
-      drawFirstButton();
-      drawSecondButton();
-    } else {
-      noHighlight();
-      drawFirstButton();
-      drawSecondButton();
-      drawThirdButton();
-    }
+    
+    drawFirstButton(this);
+    drawSecondButton(this);
+    drawThirdButton(this);
   }
 
   drawEndMusicButton() {
@@ -276,6 +281,7 @@ class Musician {
         if (this.isMouseInYesButton()) {
           this.isDisplayingMessage = false;
           this.isPlaying = true;
+          if (!this.playedMusic.has(this.music)) this.playedMusic.add(this.music);
         } else if (this.isMouseInNoButton()) this.currMessage++;
         break;
       case 3:
@@ -309,6 +315,7 @@ class Musician {
     }
     this.isDisplayingMessage = false;
     this.isPlaying = true;
+    if (!this.playedMusic.has(this.music)) this.playedMusic.add(this.music);
   }
 
   isMouseInNextButton() {
@@ -334,15 +341,14 @@ class Musician {
   }
 
   getContent() {
-    let style = 0;
     let instStyles = ["둔탁한", "부드러운", "예리한"];
     let musicStyles = ["차분한", "따뜻한", "경쾌한"]
 
     let contents = [
       '악사: \n\n   "어서오세요, 늦은 밤인데도 불구하고 찾아주셔서 감사합니다."',
       '악사: \n\n   "직접 만든 악기를 연주해달라고요? 좋습니다, 악기를 한 번 만져봐도 될까요?"',
-      `악사: \n\n   "꽤나 ${instStyles[style]} 느낌의 악기네요.\n\
-      이런 악기라면 ${musicStyles[style]} 분위기의 노래를 추천드리고 싶은데, 한 번 들어보시겠어요?"`,
+      `악사: \n\n   "꽤나 ${instStyles[this.music]} 느낌의 악기네요.\n\
+      이런 악기라면 ${musicStyles[this.music]} 분위기의 노래를 추천드리고 싶은데, 한 번 들어보시겠어요?"`,
       '악사: \n\n   "그렇다면 아래 노래 중 마음에 드시는 노래를 선택해 주시겠습니까?"',
       '악사: \n\n   "다른 노래도 들어보시겠습니까?"',
       '악사: \n\n   "좋은 악기를 연주하게 해 주어 고맙습니다.\n\

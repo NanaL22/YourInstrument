@@ -1,10 +1,12 @@
 수정된 파일 목록
 
+* src 폴더를 만들고 그 안에 draw, play, musician 등의 폴더를 만들어서 코드 파일들을 정리했습니다. 가능하면 나머지 파일들도 이런 식으로 정리해 주세요!
+
 sketch.js
 index.html
 instrument.js
 play.js
 key.js
+MyGraph.js
 musician.js
-musicianAutoPlayer.js
 musicList.js

@@ -4,12 +4,20 @@ let p1Note, p2Note, p3Note, p4Note, p5Note, p6Note;
 let keyNum = 12; // The number of keys
 let frameWidth; // Frame width
 let frameHeight; // Frame height
+let barrelWidth;
+let yRemainder;
+let barrelMaxHeight;
+let barrelMinHeight;
 //
 
 class Instrument {
   constructor() {
     frameWidth = width * 0.9;
     frameHeight = height * 0.14;
+    barrelWidth = 36;
+    yRemainder = height * 0.54;
+    barrelMaxHeight = yRemainder;
+    barrelMinHeight = barrelMaxHeight * 0.5;
 
     let numbers = [0, 1, 2, 3, 4, 5];
     shuffle(numbers, true);
@@ -37,7 +45,7 @@ class Instrument {
   draw() {
     push();
     colorMode(HSB);
-    translate(width * 0.05, height * 0.1);
+    translate(width * 0.05, height * 0.15);
     this.drawFrame();
     for (let i = 0; i < keyNum; i++) {
       this.drawKey(i);
@@ -51,12 +59,12 @@ class Instrument {
     push();
     fill(penColor);
     stroke(0);
-    strokeWeight(2);
+    strokeWeight(1);
     rect(0, 0, frameWidth, frameHeight);
 
-    fill(255);
-    noStroke();
-    ellipse(frameWidth * 0.5, frameHeight * 0.5, frameHeight * 0.15);
+    // fill(255);
+    // noStroke();
+    // ellipse(frameWidth * 0.5, frameHeight * 0.5, frameHeight * 0.15);
     pop();
   }
 
@@ -73,15 +81,17 @@ class Instrument {
 
     let dx = 0;
     let keys = ['a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j'];
-    if (keyIsPressed && (pressedKeys.has(keys[i]))) {
+    if ((keyIsPressed || mouseIsPressed) && (pressedKeys.has(keys[i]))) {
       dx = random(-3, 3);
     }
 
-    let barrelWidth = 36;
+    let isWhite = [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1];
+    fill((isWhite[i]) ? 255 : 0);
+    textSize(35);
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER)
+    text(keys[i].toUpperCase(), 0, -1 * frameHeight / 4);
 
-    let remainder = height * 0.59;
-    let barrelMaxHeight = remainder;
-    let barrelMinHeight = barrelMaxHeight * 0.5;
     let barrelHeight = map(i, 0, keyNum-1, barrelMinHeight, barrelMaxHeight);
 
     let barrelX = -0.5 * barrelWidth + dx;
@@ -93,16 +103,21 @@ class Instrument {
     // curve(barrelX + 50, barrelY, barrelX, barrelY, barrelX, barrelY + barrelHeight, barrelX + 50, barrelY + barrelHeight);
     // curve(barrelX + barrelWidth - 50, barrelY, barrelX + barrelWidth, barrelY, barrelX + barrelWidth, barrelY + barrelHeight, barrelX + barrelWidth - 50, barrelY + barrelHeight);
 
-    fill(themeColor);
+    noFill();
     stroke(0);
     strokeWeight(1);
     rect(barrelX, barrelY, barrelWidth, barrelHeight);
 
-    stroke(penColor);
-    strokeWeight(1);
-    strokeCap(SQUARE);
-    for (let j = 1; j <=3; j++) {
-      line(barrelX + barrelWidth * 0.25 * j, barrelY, barrelX + barrelWidth * 0.25 * j, barrelY + barrelHeight);
+    let colors = [];
+    colors[0] = color(mainH, ((mainS >= 35) ? mainS - 10 : mainS), mainB);
+    colors[1] = color(mainH, ((mainS >= 35) ? mainS - 25 : mainS), ((mainB <= 80) ? mainB + 10 : mainB));
+    colors[2] = themeColor;
+    colors[3] = color(mainH, ((mainS >= 35) ? mainS - 10 : mainS), ((mainB >= 35) ? mainB - 10 : mainB));
+
+    noStroke();
+    for (let j = 0; j < 4; j++) {
+      fill(colors[j]);
+      rect(barrelX + barrelWidth * 0.25 * j, barrelY, barrelWidth * 0.25, barrelHeight);
     }
 
     fill(paperColor);
@@ -119,6 +134,28 @@ class Instrument {
     noStroke();
     ellipse(0 + dx, frameHeight / 4 + frameHeight * 0.5 + frameHeight * 0.25, 5);
     pop();
+  }
+
+  isMouseInKey() {
+    let xStart = (width * 0.05) + (frameWidth / 18) - (barrelWidth * 0.5);
+    let xEnd = xStart + barrelWidth;
+    let xDist = (frameWidth * 8 / 9) / (keyNum - 1);
+    let yStart = (height * 0.15) + frameHeight + (frameHeight * 0.5);
+    let yEnd;
+
+    for (let i = 0; i < keyNum; i++) {
+      let barrelHeight = map(i, 0, keyNum-1, barrelMinHeight, barrelMaxHeight);
+      yEnd = yStart + barrelHeight;
+
+      if ((mouseX >= xStart) && (mouseX <= xEnd) && (mouseY >= yStart) && (mouseY <= yEnd)) {
+        return i;
+      }
+
+      xStart += xDist;
+      xEnd += xDist;
+    }
+
+    return -1;
   }
 
   /*
