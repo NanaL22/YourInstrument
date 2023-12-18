@@ -250,7 +250,7 @@ class Musician {
     colorMode(RGB);
 
     if (this.isMouseInEndMusicButton()) {
-      fill(255);
+      fill(mainH, 100, 70);
       textStyle(BOLD);
     } else {
       fill(255);
@@ -296,7 +296,10 @@ class Musician {
         else if (this.isMouseInNoButton()) this.currMessage = 8;
         break;
       case 7:
-        if (this.isMouseInNextButton()) resetButton.justReset(); // 아직 '공유하기' 기능 없어서 첫 페이지로 이동.
+        if (this.isMouseInNextButton()) {
+          musicianPage = false; 
+          saveAndLoadPage = true;// 아직 '공유하기' 기능 없어서 첫 페이지로 이동.
+        }
         break;
       case 8:
         if (this.isMouseInNextButton()) resetButton.justReset(); // 아직 '공유하기' 기능 없어서 첫 페이지로 이동.
@@ -341,8 +344,8 @@ class Musician {
   }
 
   getContent() {
-    let instStyles = ["둔탁한", "부드러운", "예리한"];
-    let musicStyles = ["차분한", "따뜻한", "경쾌한"]
+    let instStyles = ["둔탁한", "부드러운", "정교한"];
+    let musicStyles = ["차분한", "따뜻한", "경쾌한"];
 
     let contents = [
       '악사: \n\n   "어서오세요, 늦은 밤인데도 불구하고 찾아주셔서 감사합니다."',
@@ -359,7 +362,7 @@ class Musician {
       '악사: \n\n   "감사합니다, 이쪽으로 따라오시죠."',
       '악사: \n\n   "아쉽군요, 하지만 당신의 악기로 연주하는 것은 정말 즐거운 경험이었습니다.\n\
       당신 또한 즐거운 경험이 되셨기를 바라며, 조심히 들어가세요."'
-    ]
+    ];
 
     return contents[this.currMessage];
   }

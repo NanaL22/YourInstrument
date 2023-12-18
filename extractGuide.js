@@ -3,10 +3,8 @@ let cleaningPlaying = false;
 
 
 class ExtractGuide {
-  constructor(pic, x, y) {
+  constructor(pic) {
     this.pic = pic;
-    this.buttonX = x;
-    this.buttonY = y;
   }
 
   show() {
@@ -70,15 +68,15 @@ class ExtractGuide {
           rect(width * 0.88, height * 0.93, 70, 40, 10);
           fill(220, 180, 30);
           noStroke();
-          text("next", width * 0.88, height * 0.93);
+          text("다음", width * 0.88, height * 0.93);
         } else {
           noStroke();
           fill(255, 150);
           rect(width * 0.88, height * 0.93, 70, 40, 10);
-          text("next", width * 0.88, height * 0.93);
+          text("다음", width * 0.88, height * 0.93);
         }
       } else if (masterMessage == 4) {
-        textSize(15);
+        textSize(20);
         textStyle(BOLD);
         textAlign(CENTER, CENTER);
         if (mouseX > width * 0.88 - 70 / 2 && mouseX < width * 0.88 + 70 / 2 && mouseY > height * 0.93 - 40 / 2 && mouseY < height * 0.93 + 40 / 2) {
@@ -89,12 +87,12 @@ class ExtractGuide {
           rect(width * 0.88, height * 0.93, 70, 40, 10);
           fill(220, 180, 30);
           noStroke();
-          text("추출하기", width * 0.88, height * 0.93);
+          text("네!", width * 0.88, height * 0.93);
         } else {
           noStroke();
           fill(255, 150);
           rect(width * 0.88, height * 0.93, 70, 40, 10);
-          text("추출하기", width * 0.88, height * 0.93);
+          text("네!", width * 0.88, height * 0.93);
         }
       }
     }
@@ -148,7 +146,7 @@ class ExtractGuide {
     }
 
     if (flipFadeIn == 300 && masterMessage == 4) {
-      text('공방주인: \n\n  "색지를 카메라에 가까이 가져다대고, 추출하기 버튼을 누르면 된다네."', width * 0.1, height * 0.1 + 500);
+      text('공방주인: \n\n  "안내에 따라 색지를 카메라에 가까이 가져다대고, 색을 추출하면 되네. \n   얼마든지 다시 추출할 수 있으니, 걱정 말고 느긋하게 하게나"', width * 0.1, height * 0.1 + 500);
     }
   }
 

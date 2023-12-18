@@ -112,7 +112,7 @@ class Play {
     rectMode(CENTER);
     colorMode(RGB);
     
-    let content = this.currStartMessage ? "확인" : "next";
+    let content = this.currStartMessage ? "네!" : "다음";
     if (this.isMouseInConfirmButton()) {
       stroke(220, 180, 30);
       strokeWeight(3);
@@ -139,7 +139,7 @@ class Play {
     colorMode(RGB);
 
     if (this.isMouseInMusicianButton()) {
-      fill(0);
+      fill(mainH, 100, 70);
       textStyle(BOLD);
     } else {
       fill(0);

@@ -7,73 +7,73 @@ class Key {
 
   assign() {
     if (this.p == 1) { 
-      if (parameter1 <= 100) {
+      if (parameter1 <= 60) {
         this.sound = winds[0*13 + this.n];
-      } else if (parameter1 > 100 && parameter1 <= 200) {
+      } else if (parameter1 > 60 && parameter1 <= 120) {
         this.sound = winds[1*13 + this.n];
-      } else if (parameter1 > 200 && parameter1 <= 300) {
+      } else if (parameter1 > 120 && parameter1 <= 180) {
         this.sound = winds[2*13 + this.n];
-      } else if (parameter1 > 300) {
+      } else if (parameter1 > 180) {
         this.sound = winds[3*13 + this.n];
       }
     } 
 
     else if (this.p == 2) { 
-      if (parameter2 == 0) {
+      if (parameter2 <= 1) {
         this.sound = strings[0*13 + this.n];
-      } else if (parameter2 > 0 && parameter2 <= 2) {
+      } else if (parameter2 > 1 && parameter2 <= 2) {
         this.sound = strings[1*13 + this.n];
-      } else if (parameter2 > 2 && parameter2 <= 4) {
+      } else if (parameter2 > 2 && parameter2 <= 3) {
         this.sound = strings[2*13 + this.n];
-      } else if (parameter2 > 4) {
+      } else if (parameter2 > 3) {
         this.sound = strings[3*13 + this.n];
       }
     }
 
     else if (this.p == 3) {
-      if (parameter3 <= 5) {
+      if (parameter3 <= 8) {
         this.sound = keyboards[0*13 + this.n];
-      } else if (parameter3 > 5 && parameter3 <= 12) {
+      } else if (parameter3 > 8 && parameter3 <= 16) {
         this.sound = keyboards[1*13 + this.n];
-      } else if (parameter3 > 12 && parameter3 <= 19) {
+      } else if (parameter3 > 16 && parameter3 <= 24) {
         this.sound = keyboards[2*13 + this.n];
-      } else if (parameter3 > 19) {
+      } else if (parameter3 > 24) {
         this.sound = keyboards[3*13 + this.n];
       }
     }
 
     else if (this.p == 4) {
-      if (parameter4 <= 7) {
+      if (parameter4 <= 20) {
         this.sound = guitars[0*13 + this.n];
-      } else if (parameter4 > 7 && parameter4 <= 14) {
+      } else if (parameter4 > 20 && parameter4 <= 40) {
         this.sound = guitars[1*13 + this.n];
-      } else if (parameter4 > 14 && parameter4 <= 21) {
+      } else if (parameter4 > 40 && parameter4 <= 60) {
         this.sound = guitars[2*13 + this.n];
-      } else if (parameter4 > 21) {
+      } else if (parameter4 > 60) {
         this.sound = guitars[3*13 + this.n];
       }
     }
 
     else if (this.p == 5) {
-      if (parameter5 <= 20) {
+      if (parameter5 <= 8) {
         this.sound = organs[0*13 + this.n];
-      } else if (parameter5 > 20 && parameter5 <= 35) {
+      } else if (parameter5 > 8 && parameter5 <= 16) {
         this.sound = organs[1*13 + this.n];
-      } else if (parameter5 > 35 && parameter5 <= 50) {
+      } else if (parameter5 > 16 && parameter5 <= 24) {
         this.sound = organs[2*13 + this.n];
-      } else if (parameter5 > 50) {
+      } else if (parameter5 > 24) {
         this.sound = organs[3*13 + this.n];
       }
     }
 
     else if (this.p == 6) { 
-      if (parameter6 <= 2) {
+      if (parameter6 <= 5) {
         this.sound = brass[0*13 + this.n];
-      } else if (parameter6 > 2 && parameter6 <= 6) {
+      } else if (parameter6 > 5 && parameter6 <= 10) {
         this.sound = brass[1*13 + this.n];
-      } else if (parameter6 > 6 && parameter6 <= 10) {
+      } else if (parameter6 > 10 && parameter6 <= 15) {
         this.sound = brass[2*13 + this.n];
-      } else if (parameter6 > 10) {
+      } else if (parameter6 > 15) {
         this.sound = brass[3*13 + this.n];
       }
     }

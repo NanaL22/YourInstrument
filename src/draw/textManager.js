@@ -1,7 +1,7 @@
 let textList = [];
 let textIndex = 0;
 let textStartY = 450;
-let lineHeight = 40;
+let lineHeight = 35;
 
 let soundList = []; // 텍스트에 따라 재생할 소리의 목록
 
@@ -19,10 +19,10 @@ class TextManager {
         colorMode(HSB);
         rectMode(CORNER);
 
-        textList = ["도면을 그리고 있어요", "나무를 자르고 있어요", "조율을 하고 있어요"];
+        // textList = ["도면을 그리고 있어요", "나무를 자르고 있어요", "조율을 하고 있어요"];
 
         // 우상단 텍스트에 따라 재생할 소리의 목록 작성
-        soundList = [textSound1, textSound2, textSound3];
+        soundList = [textSound1, textSound2, textSound3, silenceSound];
 
 
         // "악기 완성하기" 글자에 배경으로 깔리는 사각형
@@ -30,98 +30,82 @@ class TextManager {
 
         fill(penColor); // 본래 themeColor였음. 조화를 위해 한 번 바꿔 봄.
         noStroke();
-        rect(60, 420, 60, 290, 10);
+        rect(60, 410, 60, 310, 10);
 
 
-        textAlign(LEFT);
+        textAlign(LEFT, CENTER);
         textStyle(BOLD);
         textSize(30);
-        fill(0);
+
+        if (mouseX > 60 && mouseX < 60 + 60 && mouseY > 420 && mouseY < 420 + 290) {
+            fill(255);
+        } else fill(0);
+
         noStroke();
 
         text("악", 75, textStartY); // y = 450
 
         textStartY += lineHeight;
-        text("기", 75, textStartY); // y = 490
+        text("기", 75, textStartY); // y = 485
 
         textStartY += lineHeight;
-        text(" ", 75, textStartY); // y = 530
-
-
-
-        if (mouseX > 60 && mouseX < 60 + 60 && mouseY > 530 && mouseY < 530 + 100) {
-            fill(255);
-        } else fill(0);
+        text(" ", 75, textStartY); // y = 520
 
         textStartY += lineHeight;
-        text("완", 75, textStartY); // y = 570
+        text("완", 75, textStartY); // y = 555
 
         textStartY += lineHeight;
-        text("성", 75, textStartY); // y = 610
-
-        fill(0);
+        text("성", 75, textStartY); // y = 590
 
         textStartY += lineHeight;
-        text("하", 75, textStartY); // y = 650
+        text("하", 75, textStartY); // y = 625
 
         textStartY += lineHeight;
-        text("기", 75, textStartY); // y = 690
+        text("기", 75, textStartY); // y = 660
 
-        textStartY = 450;
-
-        // // 우상단 텍스트 생성 공간 미리 만들어 둠
-        // fill(themeColor);
-        // noStroke();
-        // rect(585, 35, 335, 60, 20);
-
-        // fill(0);
-        // noStroke();
-        // textSize(30);
-        // text("테스트 테스트", 600, 68);
+        textStartY = 450; // y = 450
     }
 
-    draw() {
-        colorMode(HSB);
-        rectMode(CORNER);
+    // draw() {
+    //     colorMode(HSB);
+    //     rectMode(CORNER);
 
-        // 시간 
-        if (frameCount % 360 == 0) {
+    //     // 시간 
+    //     if (frameCount % 360 == 0) {
 
+    //         fill(0);
+    //         noStroke();
+    //         textSize(30);
+    //         textStyle(NORMAL);
+    //         textAlign(LEFT);
 
+    //         let displayText = textList[textIndex];
 
-            fill(0);
-            noStroke();
-            textSize(30);
-            textStyle(NORMAL);
-            textAlign(LEFT);
+    //         text(displayText, 600, 68);
 
-            let displayText = textList[textIndex];
+    //         // fill(themeColor);
+    //         // noStroke();
+    //         // rectMode(CORNER);
+    //         // rect(585, 35, 335, 60, 20);
 
-            text(displayText, 600, 68);
+    //         // 현재 출력 중인 텍스트를 기록
+    //         let currentTextIndex = textIndex;
 
-            // fill(themeColor);
-            // noStroke();
-            // rectMode(CORNER);
-            // rect(585, 35, 335, 60, 20);
+    //         // 출력 중인 텍스트에 따라 소리 재생
+    //         soundList[currentTextIndex].play();
+    //         setTimeout(function () {
+    //             soundList[currentTextIndex].stop();
+    //         }, 2500); // 2.5초 후에 효과음 정지
 
-            // 현재 출력 중인 텍스트를 기록
-            let currentTextIndex = textIndex;
+    //         textIndex += 1;
 
-            // 출력 중인 텍스트에 따라 소리 재생
-            soundList[currentTextIndex].play();
-            setTimeout(function () {
-                soundList[currentTextIndex].stop();
-            }, 2500); // 2.5초 후에 효과음 정지
-
-
-            textIndex += 1;
-            if (textIndex >= textList.length) {
-                textIndex = 0;
-            }
-        }
-        rectMode(CENTER);
-        textAlign(CENTER);
-    }
+    //         if (textIndex >= textList.length) {
+    //             textIndex = 0;
+    //         }
+    //     }
+    //     rectMode(CENTER);
+    //     textAlign(CENTER);
+    // }
 
     mouseClicked() {
 

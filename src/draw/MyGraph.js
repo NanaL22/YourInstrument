@@ -33,14 +33,24 @@ class MyGraph {
                 fill(0);
                 noStroke();
                 textStyle(BOLD);
-                textSize(15);
+                textSize(14);
                 textAlign(LEFT);
-                text("선을 긋는 빠르기는 " + parameter1, 170 + 410 + 18, 10);
-                text("지우개 사용 횟수는 " + parameter2, 170 + 410 + 18, 26);
-                text("그은 선의 획수는 " + parameter3, 170 + 410 + 18, 42);
-                text("총 소요시간은 " + parameter4, 170 + 410 + 18, 58);
-                text("펜 사용시간은 " + parameter5_1, 170 + 410 + 18, 74);
-                text("펜 사용시간 / 총 소요시간은 " + parameter5 + "%", 170 + 410 + 18, 90);
+                if (!analyzeParaPage) {
+                    text(parameter1, 170 + 410 + 18, 10);
+                    text(parameter2 + " 지우개 사용 횟수(힌트 하나 줌세!)", 170 + 410 + 18, 26);
+                    text(parameter3, 170 + 410 + 18, 42);
+                    text(parameter4, 170 + 410 + 18, 58);
+                    text(parameter5_1, 170 + 410 + 18, 74);
+                    text(parameter5 + "%", 170 + 410 + 18, 90);
+                } else if (analyzeParaPage) {
+                    text("선을 긋는 빠르기는 " + parameter1, 170 + 410 + 18, 10);
+                    text("지우개 사용 횟수는 " + parameter2, 170 + 410 + 18, 26);
+                    text("그은 선의 획수는 " + parameter3, 170 + 410 + 18, 42);
+                    text("총 소요시간은 " + parameter4, 170 + 410 + 18, 58);
+                    text("펜 사용시간은 " + parameter5_1, 170 + 410 + 18, 74);
+                    text("펜 사용시간 / 총 소요시간은 " + parameter5 + "%", 170 + 410 + 18, 90);
+                }
+
             }
 
 
@@ -63,12 +73,12 @@ class MyGraph {
             // 각 그래프 막대의 길이 최대가 파라미터마다 같으면 좋을 것 같아 "400"으로 한도치를 정하고
             // 그 범위 내에서 파라미터에 계수를 곱해주어 비례하게 맞추고자 하였음
 
-            let widthParameter1 = min(max(parameter1 * 0.5, 0), 400);; // 펜 속도 or 과감함
-            let widthParameter2 = min(max(parameter2 * (100 / 3), 0), 400); // 지우개 사용 횟수
-            let widthParameter3 = min(max(parameter3 * 12.5, 0), 400); // 펜 사용 횟수
-            let widthParameter4 = min(max(parameter4 * 5, 0), 400); // 그림 그리는 시간
-            let widthParameter5_1 = min(max(parameter5_1 * 20, 0), 400); // 펜 사용시간
-            let widthParameter5 = min(max(parameter5 * 4, 0), 400); // 총 소요시간에 대한 펜 사용시간의 비율
+            let widthParameter1 = min(max(parameter1 * ((5 / 3)), 0), 400);; // 펜 속도 or 과감함 (60~120~180)
+            let widthParameter2 = min(max(parameter2 * 100, 0), 400); // 지우개 사용 횟수 (1~2~3)
+            let widthParameter3 = min(max(parameter3 * 12.5, 0), 400); // 펜 사용 횟수 (8~16~24)
+            let widthParameter4 = min(max(parameter4 * 5, 0), 400); // 그림 그리는 시간 (20~40~60)
+            let widthParameter5_1 = min(max(parameter5_1 * 20, 0), 400); // 펜 사용시간 (5~10~15)
+            let widthParameter5 = min(max(parameter5 * 12.5, 0), 400); // 총 소요시간에 대한 펜 사용시간의 비율 (8~16~24)
 
             colorMode(HSB);
 
@@ -88,10 +98,15 @@ class MyGraph {
             } else {
                 brightnessParameter1 = 100;
             }
-            if (this.highlighted[0]) brightnessParameter1 = 100;
+            if (this.highlighted[0]) {
+                brightnessParameter1 = 100;
+                stroke(255);
+                strokeWeight(2);
+            }
             fill(mainH, 50, brightnessParameter1);
 
             rect(175, 10 - 3, widthParameter1, barHeight); // 파라미터 1 막대그래프
+            noStroke();
 
             // 파라미터 2, 3, 4, 5-1은 감소하지 않는 변수이므로 따로 배경 색으로 채워진 막대 X
 
@@ -109,10 +124,15 @@ class MyGraph {
             } else {
                 brightnessParameter2 = 100;
             }
-            if (this.highlighted[1]) brightnessParameter2 = 100;
+            if (this.highlighted[1]) {
+                brightnessParameter2 = 100;
+                stroke(255);
+                strokeWeight(2);
+            }
             fill(mainH, 50, brightnessParameter2);
 
             rect(175, 10 - 3 + barHeight + gap, widthParameter2, barHeight);
+            noStroke();
 
             // 파라미터 3 막대그래프
 
@@ -128,10 +148,15 @@ class MyGraph {
             } else {
                 brightnessParameter3 = 100;
             }
-            if (this.highlighted[2]) brightnessParameter3 = 100;
+            if (this.highlighted[2]) {
+                brightnessParameter3 = 100;
+                stroke(255);
+                strokeWeight(2);
+            }
             fill(mainH, 50, brightnessParameter3);
 
             rect(175, 10 - 3 + 2 * (barHeight + gap), widthParameter3, barHeight); // 파라미터 3 막대그래프
+            noStroke();
 
             // 파라미터 4 막대그래프
 
@@ -147,10 +172,15 @@ class MyGraph {
             } else {
                 brightnessParameter4 = 100;
             }
-            if (this.highlighted[3]) brightnessParameter4 = 100;
+            if (this.highlighted[3]) {
+                brightnessParameter4 = 100;
+                stroke(255);
+                strokeWeight(2);
+            }
             fill(mainH, 50, brightnessParameter4);
 
             rect(175, 10 - 3 + 3 * (barHeight + gap), widthParameter4, barHeight); // 파라미터 4 막대그래프
+            noStroke();
 
             // 파라미터 5_1 막대그래프
             // parameter5_1 = 펜 사용시간
@@ -167,10 +197,15 @@ class MyGraph {
             } else {
                 brightnessParameter5_1 = 100;
             }
-            if (this.highlighted[4]) brightnessParameter5_1 = 100;
+            if (this.highlighted[5]) {
+                brightnessParameter5_1 = 100;
+                stroke(255);
+                strokeWeight(2);
+            }
             fill(mainH, 50, brightnessParameter5_1);
 
             rect(175, 10 - 3 + 4 * (barHeight + gap), widthParameter5_1, barHeight); // 파라미터 5_1 막대그래프
+            noStroke();
 
 
             // 파라미터 5 막대그래프
@@ -192,10 +227,15 @@ class MyGraph {
             } else {
                 brightnessParameter5 = 100;
             }
-            if (this.highlighted[5]) brightnessParameter5 = 100;
+            if (this.highlighted[4]) {
+                brightnessParameter5 = 100;
+                stroke(255);
+                strokeWeight(2);
+            }
             fill(mainH, 50, brightnessParameter5);
 
             rect(175, 10 - 3 + 5 * (barHeight + gap), widthParameter5, barHeight); // 파라미터 5 막대그래프
+            noStroke();
 
 
             // 구간 나누는 선 그리기

@@ -1,3 +1,5 @@
+let mainFont;
+
 let resetButton;
 let directToExt;
 
@@ -36,6 +38,8 @@ let extractorImg;
 let extractor;
 let cam;
 
+let between;
+let betweenExtToDraw = false;
 
 let drawingPage_1 = false;
 let drawingPage_2 = false;
@@ -50,7 +54,9 @@ let drawingPage_3 = false;
 let developingPage = false;
 //
 
-let between;
+let analyzeParaPage = false;
+let analyzePara;
+
 let betweenDrawToPlay = false;
 
 
@@ -72,6 +78,11 @@ let musicianImg3;
 //
 let crowd;
 
+// Save and Load Page
+let saveAndLoadPage = false;
+let musicianHome;
+let saveAndLoad;
+
 let winds = [];
 let strings = [];
 let keyboards = [];
@@ -83,6 +94,8 @@ let myInst;
 
 
 function preload() {
+  mainFont = loadFont("assets/YeongdeokBlueroad.otf");
+
   //수정된 이미지로 변경하여 로드
   startingImg = loadImage("assets/images/workshop_outside.png");
   withMasterImg = loadImage("assets/images/workshop_inside.png");
@@ -101,8 +114,10 @@ function preload() {
 
   // 로딩 화면 이미지 파일 불러오기
   loadingImage = loadImage('assets/table_mess.PNG');
+  silenceSound = loadSound('assets/silence.mp3');
 
   // Play Page images
+  // masterImg2 = loadImage("assets/master_2.png")
   insideWorkshopImg = loadImage("assets/workshop_inside.png")
   //
 
@@ -112,6 +127,9 @@ function preload() {
   musicianImg2 = loadImage("assets/musician_surprised.png");
   musicianImg3 = loadImage("assets/musician_smile.png");
   //
+
+  //saveAndLoad Page images
+  musicianHome = loadImage("assets/images/musicianHome.png")
 
   // 우상단 텍스트에 따라 나오는 효과음
   textSound1 = loadSound('assets/drawing.mp3'); // 도면 그리는 효과음
@@ -166,21 +184,24 @@ function preload() {
 
 function setup() {
   createCanvas(1000, 750);
+  textFont(mainFont);
   resetButton = new ResetButton();
   directToExt = new DirectToExt();
   between = new Between();
 
-  starting = new Starting(startingImg, width / 2, height / 2);
+  starting = new Starting(startingImg);
   //추가된 페이지들
-  withMaster = new WithMaster(withMasterImg, width / 2, height / 2);
-  extractGuide = new ExtractGuide(extractGuideImg, width / 2, height / 2);
+  withMaster = new WithMaster(withMasterImg);
+  extractGuide = new ExtractGuide(extractGuideImg);
   //
-  extractor = new Extractor(extractorImg, width * 0.55, height / 2);
+  extractor = new Extractor(extractorImg);
 
   drawingApp = new DrawingApp();
   textManager = new TextManager();
 
   myGraph = new MyGraph();
+
+  analyzePara = new AnalyzePara();
 
   // Create Play object
   let playPageImages = [insideWorkshopImg, master1, master2];
@@ -191,6 +212,8 @@ function setup() {
   let musicianPageImages = [streetImg, musicianImg1, musicianImg2, musicianImg3];
   musician = new Musician(musicianPageImages);
   //  
+
+  saveAndLoad = new SaveAndLoad()
 }
 
 function draw() {
@@ -198,14 +221,10 @@ function draw() {
     colorMode(RGB);
     starting.bgm();
     starting.show();
-    starting.yourMouse();
-    //추가된 기능
     starting.soundEffect();
     starting.coloring();
-    // starting.title();
     starting.toTheWorkshop();
     starting.flip();
-    // 
   } else if (withMasterPage) { // 추가된 페이지
     withMaster.bgm();
     withMaster.show();
@@ -225,12 +244,18 @@ function draw() {
   }
   else if (extractorPage) { //기능 변경 & nextPage 삭제
     withMaster.bgm();
-    extractor.show();
-    extractor.paint();
+    extractor.select();
+    extractor.check();
+    extractor.final();
+    extractor.extracting();
+    extractor.nextButton();
     extractor.decide();
-  } else if (drawingPage_1) {
+  } else if (betweenExtToDraw) {
+    between.extToDraw();
+  }  else if (drawingPage_1) {
     colorMode(HSB);
     drawingApp.drawFrame();
+    drawingApp.penSetting();
     drawingPage_1 = false;
     drawingPage_2 = true;
   } else if (drawingPage_2) {
@@ -238,6 +263,7 @@ function draw() {
     colorMode(HSB);
     drawingApp.draw();
     textManager.complete();
+    myGraph.drawingAppGraph();
     // textManager.draw();
   } else if (drawingPage_3) { // 그림 그리기 완료 후 나오는 대화창 전용 시퀀스 새로 생성하였음
     withMaster.bgm();
@@ -249,6 +275,10 @@ function draw() {
     // background(themeColor);
     drawingApp.toNextNextPage();
     //textManager.draw();
+  } else if (analyzeParaPage) {
+    analyzePara.show();
+    analyzePara.result();
+    analyzePara.nextButton();
   } else if (betweenDrawToPlay) {
     between.drawToPlay();
   } else if (playPage) {
@@ -262,6 +292,9 @@ function draw() {
   } else if (musicianPage) { // 추가
     colorMode(HSB, 360, 100, 100, 1);
     musician.show();
+  } else if (saveAndLoadPage) {
+    console.log("showOK")
+    saveAndLoad.show();
   }
 
   if (!startingPage) {
@@ -287,11 +320,16 @@ function mouseClicked() {
     extractGuide.toNextMessage();
   } else if (extractorPage) {
     extractor.clickToDecide();
+  } else if (betweenExtToDraw) {
+    between.extToDraw();
   } else if (drawingPage_2) {
     drawingApp.mouseClicked();
     textManager.mouseClicked();
   } else if (drawingPage_3) {
     drawingApp.mouseClicked();
+  } else if (analyzeParaPage) {
+    analyzePara.next();
+    analyzePara.checkSound();
   }
   // else if (developingPage) {
   //   drawingApp.mouseClicked();
@@ -300,9 +338,11 @@ function mouseClicked() {
     play.mouseClicked();
   } else if (musicianPage) { // 추가
     musician.mouseClicked();
+  } else if (saveAndLoadPage) {
+    saveAndLoad.mouseClicked();
   }
 
-  if(!startingPage) {
+  if (!startingPage) {
     resetButton.backToStart();
   }
   if (withMasterPage || extractGuidePage) {
@@ -330,8 +370,8 @@ function keyPressed() {
   if (keyCode === ESCAPE) {
     cursor();
     starting = new Starting(startingImg, width / 2, height / 2);
-    startingPage = true; withMasterPage = false; extractGuidePage = false; extractorPage = false; 
-    drawingPage_1 = false; drawingPage_2 = false; drawingPage_3 = false; developingPage = false;playPage = false;
+    startingPage = true; withMasterPage = false; extractGuidePage = false; extractorPage = false;
+    drawingPage_1 = false; drawingPage_2 = false; drawingPage_3 = false; developingPage = false; playPage = false;
 
     starting.reset(); withMaster.reset(); drawingApp.reset(); textManager.reset();
     zoomToFlip = 0; flipFadeIn = 0; masterMessage = 1;

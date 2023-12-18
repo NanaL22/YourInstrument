@@ -12,13 +12,11 @@ let startingBGMPlaying = false;
 
 
 class Starting {
-  constructor(pic, x, y) {
+  constructor(pic) {
     this.pic = pic;
     this.gray = createImage(pic.width, pic.height);
     this.gray.copy(pic, 0, 0, pic.width, pic.height, 0, 0, pic.width, pic.height);
     this.gray.filter(GRAY);
-    this.buttonX = x;
-    this.buttonY = y;
     this.pic.loadPixels();
     this.gray.loadPixels();
   }
@@ -86,6 +84,7 @@ class Starting {
       if (mouseX > 60 && mouseX < 115 && mouseY > 215 && mouseY < 350) familyArea = true;
       else familyArea = false;
       if (familyArea && !familyPlaying) {
+        family.setVolume(1.3);
         family.play();
         familyPlaying = true;
       }
@@ -97,7 +96,16 @@ class Starting {
       //knock
       if (mouseX > 600 && mouseX < 750 && mouseY > 400 && mouseY < 650) knockArea = true;
       else knockArea = false;
+      //
+      if (knockArea) {
+        fill(220, 180, 30, 100);
+        // stroke(220, 180, 30);
+        // strokeWeight(3);
+        rectMode(CORNERS);
+        rect(600, 400, 750, 650, 30);
+      }
       if (knockArea && !knockPlaying) {
+        knock.setVolume(1.5);
         knock.play();
         knockPlaying = true;
       }
@@ -309,19 +317,5 @@ class Starting {
   }
 
 
-  //
-
-
-
-
-  title() {
-    colorMode(RGB);
-    noStroke();
-    fill(255);
-    textAlign(LEFT, CENTER);
-    textSize(20);
-    textStyle(NORMAL);
-    text("소리가 들리는 곳을 \n   클릭해 보세요", width * 0.05, height * 0.07);
-  }
 }
 

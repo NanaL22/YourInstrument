@@ -10,10 +10,8 @@ let insideBGMPlaying = false;
 
 
 class WithMaster {
-  constructor(pic, x, y) {
+  constructor(pic) {
     this.pic = pic;
-    this.buttonX = x;
-    this.buttonY = y;
   }
 
   reset() {
@@ -80,7 +78,7 @@ class WithMaster {
 
   nextMessage() {
     if (flipFadeIn >= 300) {
-      if (masterMessage < 4) {
+      if (masterMessage < 5) {
         textSize(20);
         textStyle(BOLD);
         textAlign(CENTER, CENTER);
@@ -92,15 +90,15 @@ class WithMaster {
           rect(width * 0.88, height * 0.93, 70, 40, 10);
           fill(220, 180, 30);
           noStroke();
-          text("next", width * 0.88, height * 0.93);
+          text("다음", width * 0.88, height * 0.93);
         } else {
           noStroke();
           fill(255, 150);
           rect(width * 0.88, height * 0.93, 70, 40, 10);
-          text("next", width * 0.88, height * 0.93);
+          text("다음", width * 0.88, height * 0.93);
         }
-      } else if (masterMessage == 4) {
-        textSize(15);
+      } else if (masterMessage == 5) {
+        textSize(20);
         textStyle(BOLD);
         textAlign(CENTER, CENTER);
         if (mouseX > width * 0.88 - 70 / 2 && mouseX < width * 0.88 + 70 / 2 && mouseY > height * 0.93 - 40 / 2 && mouseY < height * 0.93 + 40 / 2) {
@@ -123,7 +121,7 @@ class WithMaster {
   }
 
   skip() {
-    if (masterMessage < 4) {
+    if (masterMessage < 5) {
       if (flipFadeIn >= 300) {
         textSize(20);
         textStyle(BOLD);
@@ -158,15 +156,19 @@ class WithMaster {
     }
 
     if (flipFadeIn == 300 && masterMessage == 2) {
-      text('공방주인: \n\n   "이 곳은 자네가 그리는 그림을 기반으로 악기를 만들어 주는 공방이라네."', width * 0.1, height * 0.1 + 500);
+      text('공방주인: \n\n   "내, 자네의 성향에 맞춰 악기의 소리들을 정해 줄 걸세. \n   한 가지 소리만 내는 재미없는 악기는 상상하지 말게나! 허허허"', width * 0.1, height * 0.1 + 500);
     }
 
     if (flipFadeIn == 300 && masterMessage == 3) {
-      text('공방주인: \n\n   “자네가 그림을 그리면서 하는 모든 행동들이 악기의 소리에 영향을 미칠 거야. \n   얼마나 그림을 오래 그리는지, 얼마나 선을 과감하게 긋는지, \n   그림을 그리며 얼마나 망설이는지까지 전부.”', width * 0.1, height * 0.1 + 500);
+      text('공방주인: \n\n   "아, 자네의 성향을 어떻게 알 수 있느냐고? \n   자네에게 그림을 그리게 할 걸세! \n   자네가 그림을 그리면서 보이는 행동들이 악기의 소리에 영향을 미칠 거야."', width * 0.1, height * 0.1 + 500);
     }
 
     if (flipFadeIn == 300 && masterMessage == 4) {
       text('공방주인: \n\n  "완성된 악기는 직접 연주해볼 수도, 악사에게 악기 연주를 부탁할 수도 있다네. \n   한 번 만들어보겠나?"', width * 0.1, height * 0.1 + 500);
+    }
+
+    if (flipFadeIn == 300 && masterMessage == 5) {
+      text('공방주인: \n\n  "놓쳤을 수 있으니 다시 한 번 잘 듣게. \n   그림을 그릴 때 보이는 자네의 성향 정보를 근거로 악기의 소리들이 정해질 거야. \n   준비 됐으면 작업대로 가세!"', width * 0.1, height * 0.1 + 500);
     }
   }
 
@@ -177,13 +179,13 @@ class WithMaster {
     }
 
     if (mouseX > width * 0.88 - 70 / 2 && mouseX < width * 0.88 + 70 / 2 && mouseY > height * 0.05 - 40 / 2 && mouseY < height * 0.05 + 40 / 2) {
-      masterMessage = 4;
+      masterMessage = 5;
     }
   }
 
 
   flip() {
-    if (masterMessage == 5) {
+    if (masterMessage == 6) {
       if (flipFadeIn < 350) {
         fill(0, 480 - flipFadeIn * 1.3);
         rect(width / 2, height / 2, width, height);

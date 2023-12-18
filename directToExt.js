@@ -23,6 +23,9 @@ class DirectToExt {
   //마우스 클릭하면
   jumpToExt() {
     if (mouseX > width * 0.93 - 70 / 2 && mouseX < width * 0.93 + 70 / 2 && mouseY > height * 0.98 - 40 / 2 && mouseY < height * 0.98 + 40 / 2) {
+      nextForExt = 0;
+      flipFadeIn = 0;
+      notYet = true;
       withMasterPage = false;
       extractGuidePage = false;
       extractorPage = true;
