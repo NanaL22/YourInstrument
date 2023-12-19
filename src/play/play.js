@@ -62,16 +62,16 @@ class Play {
 
   mouseClicked() {
     if (this.isDisplayingStartMessage && this.isMouseInConfirmButton()) {
-      if (this.currStartMessage == 0) this.currStartMessage = 1;
-      else {
-        this.isDisplayingStartMessage = false;
-        this.currStartMessage = 0;
-        this.isPlaying = true;
-      }
-    } else if (this.isPlaying && this.isMouseInMusicianButton()) {
+      this.isDisplayingStartMessage = false;
+      this.isPlaying = true;
+    } else if (this.isPlaying && !saveAndLoad.isNotMyInst && this.isMouseInMusicianButton()) {
       this.isPlaying = false;
       this.isDisplayingEndMessage = true;
-    } else if (this.isDisplayingEndMessage && this.isMouseInConfirmButton()) {
+    } else if (this.isPlaying && saveAndLoad.isNotMyInst && this.isMouseInMusicianButton()) {
+      this.isPlaying = false;
+      playPage = false;
+      saveAndLoadPage = true;
+     } else if (this.isDisplayingEndMessage && this.isMouseInConfirmButton()) {
       playPage = false;
       betweenPlayToMusician = true;
     }
@@ -146,7 +146,11 @@ class Play {
       textStyle(NORMAL);
     }
     noStroke();
-    text("악사 찾아가기", width * 0.91, height * 0.05);
+    if (!saveAndLoad.isNotMyInst) {
+      text("악사 찾아가기", width * 0.91, height * 0.05); 
+    } else if (saveAndLoad.isNotMyInst) {
+      text("악기 둘러보기", width * 0.91, height * 0.05); 
+    }
     pop();
   }
  
