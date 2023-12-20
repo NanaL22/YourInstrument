@@ -53,7 +53,7 @@ class ResetButton {
       saveAndLoad.goToFirstPage = false;
       saveAndLoad.isNotMyInst = false;
       saveAndLoad.currMessage = 0;
-      //saveAndLoad.instSave = [[0, 0, 0, 0, 0, 0, 330, 15, 100], [150, 1, 7, 10, 25, 5, 189, 60, 90], [250, 3, 17, 20, 40, 8, 54, 50, 98], [500, 10, 20, 25, 55, 20, 0, 61, 95]]; //초기화하면 안 되는 부분
+      saveAndLoad.instSave = [[0, 0, 0, 0, 0, 0, 330, 15, 100], [150, 1, 7, 10, 25, 5, 189, 60, 90], [250, 3, 17, 20, 40, 8, 54, 50, 98], [500, 10, 20, 25, 55, 20, 0, 61, 95]]; //초기화하면 안 되는 부분
 
     }
   }
@@ -91,7 +91,7 @@ class ResetButton {
     saveAndLoad.goToFirstPage = false;
     saveAndLoad.isNotMyInst = false;
     saveAndLoad.currMessage = 0;
-    //saveAndLoad.instSave = [[0, 0, 0, 0, 0, 0, 330, 15, 100], [150, 1, 7, 10, 25, 5, 189, 60, 90], [250, 3, 17, 20, 40, 8, 54, 50, 98], [500, 10, 20, 25, 55, 20, 0, 61, 95]]; //초기화하면 안 되는 부분
+    saveAndLoad.instSave = [[0, 0, 0, 0, 0, 0, 330, 15, 100], [150, 1, 7, 10, 25, 5, 189, 60, 90], [250, 3, 17, 20, 40, 8, 54, 50, 98], [500, 10, 20, 25, 55, 20, 0, 61, 95]]; //초기화하면 안 되는 부분
 
   }
 }
