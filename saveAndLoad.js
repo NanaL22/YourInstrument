@@ -113,19 +113,19 @@ class SaveAndLoad {
     colorMode(HSB)
     fill(this.originalH, 30, 100);
     if (this.isMouseInFirstInst()) fill(this.originalH, 80, 100);
-    rect(150, 135, 200, 200);
+    rect(150, 125, 200, 200);
     fill(this.originalH, 30, 100);
     if (this.isMouseInSecondInst()) fill(this.originalH, 80, 100);
-    rect(400, 135, 200, 200);
+    rect(400, 125, 200, 200);
     fill(this.originalH, 30, 100);
     if (this.isMouseInThirdInst()) fill(this.originalH, 80, 100);
-    rect(650, 135, 200, 200);
+    rect(650, 125, 200, 200);
     fill(this.originalH, 30, 100);
     if (this.isMouseInFourthInst()) fill(this.originalH, 80, 100);
-    rect(275, 435, 200, 200);
+    rect(275, 425, 200, 200);
     fill(this.originalH, 30, 100);
     if (this.isMouseInFifthInst()) fill(this.originalH, 80, 100);
-    rect(525, 435, 200, 200);
+    rect(525, 425, 200, 200);
     fill(0);
     text("'K'의 악기", 250, 260);
     text("'L'의 악기", 500, 260);
